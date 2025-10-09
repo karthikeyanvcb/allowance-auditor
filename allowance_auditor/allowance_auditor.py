@@ -24,7 +24,6 @@ import argparse
 import csv
 import json
 import logging
-import sys
 from dataclasses import dataclass
 from typing import Dict, Iterable, List, Optional, Tuple
 
@@ -217,7 +216,7 @@ def get_token_metadata(rpc: EthereumRPC, token: str) -> Tuple[str, int]:
 
     Falls back to defaults if the call fails or returns an empty result.
     """
-    token_lc = clean_address(token)
+
     symbol = token
     decimals = 18
     # symbol
@@ -230,7 +229,7 @@ def get_token_metadata(rpc: EthereumRPC, token: str) -> Tuple[str, int]:
         if data and len(data) >= 130:  # 0x + 32 bytes offset + length + padded string
             # The string length is encoded in bytes 64–96
             length = int(data[66:130], 16)
-            hex_string = data[130 : 130 + length * 2]
+            hex_string = data[130:130 + length * 2]
             bytes_string = bytes.fromhex(hex_string)
             symbol = bytes_string.decode("utf‑8", errors="ignore")
     except Exception:

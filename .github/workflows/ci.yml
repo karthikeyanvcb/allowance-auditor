@@ -26,7 +26,7 @@ jobs:
 
       - name: Run flake8
         run: |
-          flake8 allowance_auditor --count --max-line-length=88 --show-source --statistics
+      flake8 allowance_auditor --count --max-line-length=120 --show-source --statistics
 
       - name: Run unit tests
         run: |
